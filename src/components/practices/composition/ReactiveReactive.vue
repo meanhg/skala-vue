@@ -1,0 +1,42 @@
+<script setup>
+import { reactive } from 'vue'
+
+// 객체형 reactive 상태
+const userReactive = reactive({
+  name: '이순신',
+  age: 30,
+})
+
+const celebrateReactive = () => {
+  userReactive.age++
+}
+
+// 배열형 reactive 상태
+const items = reactive(['사과', '바나나'])
+
+const addItem = () => {
+  items.push(`과일 ${items.length + 1}`)
+}
+
+const removeItem = (index) => {
+  items.splice(index, 1)
+}
+</script>
+
+<template>
+  <div class="practice-section">
+    <h2>반응형 상태 reactive() 기초</h2>
+    <h3>1) 객체(Object) reactive</h3>
+    <p>이름: {{ userReactive.name }} / 나이: {{ userReactive.age }}세</p>
+    <button type="button" @click="celebrateReactive">reactive 나이 한 살 추가</button>
+
+    <h3>2) 배열(Array) reactive</h3>
+    <ul>
+      <li v-for="(item, index) in items" :key="`${item}-${index}`">
+        {{ item }}
+        <button type="button" @click="removeItem(index)">삭제</button>
+      </li>
+    </ul>
+    <button type="button" @click="addItem">과일 항목 추가</button>
+  </div>
+</template>

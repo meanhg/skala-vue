@@ -24,9 +24,13 @@ import VuePre from '@/components/practices/basic/VuePre.vue'
 import VueShow from '@/components/practices/basic/VueShow.vue'
 import VueText from '@/components/practices/basic/VueText.vue'
 import AxiosWeather from '@/components/practices/library/AxiosWeather.vue'
+import ReactiveReactive from '@/components/practices/composition/ReactiveReactive.vue'
+import ReactiveRef from '@/components/practices/composition/ReactiveRef.vue'
 
 const practices = [
   ['반응성 데이터', 'SampleOne', SampleOne],
+  ['ref() 반응형 상태', 'ReactiveRef', ReactiveRef],
+  ['reactive() 반응형 상태', 'ReactiveReactive', ReactiveReactive],
   ['텍스트 보간법', 'SampleTwo', SampleTwo],
   ['v-html', 'VueHtml', VueHtml],
   ['v-html XSS', 'VueHtmlXss', VueHtmlXss],
