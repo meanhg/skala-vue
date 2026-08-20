@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch, watchEffect } from 'vue'
 
 // 대한민국 광역시 6곳의 목 데이터입니다. 데이터 추가 기능은 다음 과제에서 확장합니다.
 const weatherList = ref([
@@ -11,13 +11,32 @@ const weatherList = ref([
   { id: 'city_06', name: '울산', temp: 25, status: '맑음' },
 ])
 
-const keyword = ref('')
+const searchQuery = ref('')
 const selectedCity = ref('')
 const selectedCityInfo = ref('카드를 클릭하거나 검색해 보세요.')
 
 const filteredWeatherList = computed(() => {
-  const query = keyword.value.trim()
+  const query = searchQuery.value.trim()
+
+  if (!query) {
+    return weatherList.value
+  }
+
   return weatherList.value.filter((city) => city.name.includes(query))
+})
+
+const selectedCityName = computed(() => selectedCity.value || '선택된 도시 없음')
+
+watch(selectedCityInfo, (newInfo) => {
+  console.log(`👁️‍🗨️ [watch 감지] 상태 바 문구가 업데이트되었습니다 -> "${newInfo}"`)
+})
+
+watch(selectedCity, (cityName) => {
+  console.log(`선택한 도시: ${cityName}`)
+})
+
+watchEffect(() => {
+  console.log(`🤖 [watchEffect 자동 호출] 현재 검색어 '${searchQuery.value}'에 매칭되는 API 데이터를 필터링합니다.`)
 })
 
 const selectCity = (city) => {
@@ -34,11 +53,12 @@ const showDetail = (city) => {
 
 <template>
   <section class="weather-mockup">
-    <h2>🌤️ 과제 1: 날씨 (Mockup)</h2>
+    <h2>🌤️ 과제 2: 날씨 (컴포지션)</h2>
     <div class="search-area">
       <label for="city-search">🔍 도시 검색</label>
-      <input id="city-search" v-model="keyword" type="search" placeholder="검색할 도시 이름" />
-      <small>검색된 도시: {{ filteredWeatherList.length }}곳</small>
+      <input id="city-search" v-model="searchQuery" type="search" placeholder="검색할 도시 이름" />
+      <small>검색 중인 도시: {{ searchQuery }}</small>
+      <small>선택한 도시: {{ selectedCityName }}</small>
     </div>
 
     <section class="list-panel" aria-labelledby="weather-list-title">

@@ -26,11 +26,23 @@ import VueText from '@/components/practices/basic/VueText.vue'
 import AxiosWeather from '@/components/practices/library/AxiosWeather.vue'
 import ReactiveReactive from '@/components/practices/composition/ReactiveReactive.vue'
 import ReactiveRef from '@/components/practices/composition/ReactiveRef.vue'
+import ComputedBasic from '@/components/practices/composition/ComputedBasic.vue'
+import WatchersBasic from '@/components/practices/composition/WatchersBasic.vue'
+import WatchersDeep from '@/components/practices/composition/WatchersDeep.vue'
+import WatchersMulti from '@/components/practices/composition/WatchersMulti.vue'
+import WatchersReactive from '@/components/practices/composition/WatchersReactive.vue'
+import WatchersWatchEffect from '@/components/practices/composition/WatchersWatchEffect.vue'
 
 const practices = [
   ['반응성 데이터', 'SampleOne', SampleOne],
   ['ref() 반응형 상태', 'ReactiveRef', ReactiveRef],
   ['reactive() 반응형 상태', 'ReactiveReactive', ReactiveReactive],
+  ['computed() 캐싱', 'ComputedBasic', ComputedBasic],
+  ['watch() 기본', 'WatchersBasic', WatchersBasic],
+  ['watch() 다중 감시', 'WatchersMulti', WatchersMulti],
+  ['watch() deep 감시', 'WatchersDeep', WatchersDeep],
+  ['watch() reactive 감시', 'WatchersReactive', WatchersReactive],
+  ['watchEffect() 자동 감시', 'WatchersWatchEffect', WatchersWatchEffect],
   ['텍스트 보간법', 'SampleTwo', SampleTwo],
   ['v-html', 'VueHtml', VueHtml],
   ['v-html XSS', 'VueHtmlXss', VueHtmlXss],

@@ -37,6 +37,18 @@ npm run dev
 - 카드 클릭 선택 알림과 상세보기 버튼의 이벤트 전파 차단 (`.stop`)
 - 데이터 추가 기능은 다음 단계에서 구현 예정
 
+## 3일차 · Composition API 실습
+
+기존 Weather Mockup을 Composition API로 발전시켰습니다.
+
+- `ref()`로 검색어, 선택 도시, 날씨 목록 상태 관리
+- `computed()`를 활용한 도시명 실시간 검색 (`filteredWeatherList`)
+- `watch()`로 선택 상태 문구와 선택 도시 변경 감시
+- `watchEffect()`로 검색어 변경 자동 감시
+- 검색 결과가 없을 때 안내 문구 출력
+
+![Composition API Watcher 실습 화면](screenshots/weather-composition-watchers.png)
+
 ## 명령어
 
 ```sh

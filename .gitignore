@@ -21,5 +21,6 @@ dist/
 npm-debug.log
 yarn-error.log
 source-code/
+*.pdf
 
 # End of https://www.toptal.com/developers/gitignore/api/vue,vuejs
