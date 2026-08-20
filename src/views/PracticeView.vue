@@ -32,6 +32,7 @@ import WatchersDeep from '@/components/practices/composition/WatchersDeep.vue'
 import WatchersMulti from '@/components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from '@/components/practices/composition/WatchersReactive.vue'
 import WatchersWatchEffect from '@/components/practices/composition/WatchersWatchEffect.vue'
+import LifecycleParent from '@/components/practices/component/LifecycleParent.vue'
 
 const practices = [
   ['반응성 데이터', 'SampleOne', SampleOne],
@@ -43,6 +44,7 @@ const practices = [
   ['watch() deep 감시', 'WatchersDeep', WatchersDeep],
   ['watch() reactive 감시', 'WatchersReactive', WatchersReactive],
   ['watchEffect() 자동 감시', 'WatchersWatchEffect', WatchersWatchEffect],
+  ['Component Lifecycle', 'LifecycleParent', LifecycleParent],
   ['텍스트 보간법', 'SampleTwo', SampleTwo],
   ['v-html', 'VueHtml', VueHtml],
   ['v-html XSS', 'VueHtmlXss', VueHtmlXss],
