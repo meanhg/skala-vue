@@ -93,31 +93,31 @@ onMounted(async () => {
   <div class="detail-container">
     <h3>📊 지역별 상세 기상 관측 정보</h3>
     <hr />
-    <div v-if="cityData" class="info-card">
+    <el-card v-if="cityData" class="info-card" shadow="never">
       <h4>📍 지정 지역: {{ cityData.name }}</h4>
       <p>실시간 기온: <strong>{{ displayTemp }}{{ configStore.unitSymbol }}</strong></p>
       <p>기상 현황: {{ cityData.status }}</p>
       <p>대기 습도: {{ cityData.humidity }}</p>
       <p>현재 풍속: {{ cityData.wind }}</p>
-    </div>
+    </el-card>
     <p v-else>해당 지역의 상세 데이터 장부가 존재하지 않습니다.</p>
 
-    <section v-if="forecastItems.length" class="forecast-card">
+    <el-card v-if="forecastItems.length" class="forecast-card" shadow="never">
       <h4>🗓️ OpenWeatherMap 단기 예보</h4>
       <ul>
         <li v-for="item in forecastItems" :key="item.dt">
           {{ item.dt_txt }} · {{ formatTemp(item.main.temp) }}{{ configStore.unitSymbol }} · {{ item.weather[0].description }}
         </li>
       </ul>
-    </section>
+    </el-card>
 
-    <section v-if="additionalWeather" class="additional-card">
+    <el-card v-if="additionalWeather" class="additional-card" shadow="never">
       <h4>🌡️ Open-Meteo 보조 관측</h4>
       <p>체감 온도: {{ formatTemp(additionalWeather.apparent_temperature) }}{{ configStore.unitSymbol }}</p>
       <p>풍속: {{ additionalWeather.wind_speed_10m }} km/h</p>
-    </section>
-    <p v-if="forecastError" class="forecast-error">{{ forecastError }}</p>
-    <button type="button" class="back-btn" @click="router.push('/')">← 메인 대시보드로 돌아가기</button>
+    </el-card>
+    <el-alert v-if="forecastError" :title="forecastError" type="warning" :closable="false" show-icon />
+    <el-button type="primary" @click="router.push('/')">← 메인 대시보드로 돌아가기</el-button>
   </div>
 </template>
 
@@ -125,10 +125,8 @@ onMounted(async () => {
 .detail-container { padding: 4px; }
 .info-card { margin: 15px 0; padding: 15px; border-radius: 6px; background: #f1f2f6; }
 .info-card p { margin: 7px 0; }
-.back-btn { padding: 8px 12px; border: none; border-radius: 4px; background: #2c3e50; color: white; cursor: pointer; }
 .forecast-card, .additional-card { margin: 15px 0; padding: 15px; border-radius: 6px; background: #f8fafc; }
 .forecast-card h4, .additional-card h4 { margin: 0 0 10px; }
 .forecast-card ul { margin: 0; padding-left: 20px; }
 .forecast-card li, .additional-card p { margin: 6px 0; }
-.forecast-error { color: #c0392b; }
 </style>

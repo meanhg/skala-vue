@@ -24,6 +24,21 @@ const router = createRouter({
       component: () => import('@/views/WeatherGuideView.vue'),
     },
     {
+      path: '/signup',
+      name: 'SignUp',
+      component: () => import('@/views/SignUpView.vue'),
+    },
+    {
+      path: '/product-rating',
+      name: 'ProductRating',
+      component: () => import('@/views/ProductRatingView.vue'),
+    },
+    {
+      path: '/feedback',
+      name: 'SystemFeedback',
+      component: () => import('@/views/SystemFeedbackView.vue'),
+    },
+    {
       path: '/practices',
       name: 'practices',
       component: () => import('@/views/PracticeView.vue'),

@@ -12,6 +12,7 @@ const configStore = useConfigStore()
 </template>
 
 <style scoped>
-.unit-toggler { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; color: #64748b; font-size: .72rem; white-space: nowrap; }
-button { padding: 6px 10px; border: none; border-radius: 4px; background: #4b6584; color: white; cursor: pointer; font-size: .7rem; font-weight: bold; }
+.unit-toggler { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; color: #64748b; font-size: .78rem; white-space: nowrap; }
+button { padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; background: #fff; color: #475569; cursor: pointer; font-size: .75rem; font-weight: 600; }
+button:hover { border-color: #93c5fd; color: #2563eb; }
 </style>

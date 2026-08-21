@@ -112,34 +112,36 @@ const handleDetailJump = (city) => {
 
 <template>
   <div class="dashboard-wrapper">
-    <BaseDashboardCard>
-      <SearchBar :current-query="searchQuery" @update-query="(value) => (searchQuery = value)" />
-    </BaseDashboardCard>
+    <section class="weather-section">
+      <BaseDashboardCard>
+        <SearchBar :current-query="searchQuery" @update-query="(value) => (searchQuery = value)" />
+      </BaseDashboardCard>
 
-    <BaseDashboardCard>
-      <h3>🏙️ 지역별 날씨 현황</h3>
-      <p v-if="isLoading" class="loading">🔄 실시간 날씨 데이터를 불러오는 중입니다.</p>
-      <p v-else-if="apiError" class="api-error">{{ apiError }}</p>
-      <WeatherCard
-        v-for="item in filteredWeatherList"
-        :key="item.id"
-        :city-item="item"
-        :selected-city="selectedCity"
-        @select-card="selectCity"
-        @click-detail="handleDetailJump"
-      />
-      <p v-if="!isLoading && filteredWeatherList.length === 0" class="empty">😭 검색 결과와 일치하는 도시가 없습니다.</p>
-    </BaseDashboardCard>
+      <BaseDashboardCard>
+        <h3>🏙️ 지역별 날씨 현황</h3>
+        <el-alert v-if="isLoading" title="실시간 날씨 데이터를 불러오는 중입니다." type="info" :closable="false" show-icon />
+        <el-alert v-else-if="apiError" :title="apiError" type="error" :closable="false" show-icon />
+        <template v-else>
+          <WeatherCard
+            v-for="item in filteredWeatherList"
+            :key="item.id"
+            :city-item="item"
+            :selected-city="selectedCity"
+            @select-card="selectCity"
+            @click-detail="handleDetailJump"
+          />
+          <el-empty v-if="filteredWeatherList.length === 0" description="검색 결과와 일치하는 도시가 없습니다." :image-size="80" />
+        </template>
+      </BaseDashboardCard>
+    </section>
 
     <div class="status-bar">{{ selectedCityInfo }}</div>
   </div>
 </template>
 
 <style scoped>
-.dashboard-wrapper { width: min(100%, 600px); margin: 0 auto; }
-.dashboard-wrapper h3 { margin: 0 0 10px; color: #64748b; font-size: .9rem; }
-.empty { margin: 0; padding: 10px 0; color: #e74c3c; text-align: center; }
-.loading { padding: 10px 0; color: #3498db; font-weight: bold; text-align: center; }
-.api-error { padding: 10px; border-radius: 6px; background: #fff5f5; color: #c0392b; text-align: center; }
-.status-bar { padding: 10px; border-radius: 6px; background: #e8f5e9; color: #2e7d32; font-weight: bold; text-align: center; }
+.dashboard-wrapper { width: 100%; margin: 0; }
+.weather-section { width: 100%; margin: 0; }
+.dashboard-wrapper h3 { margin: 0 0 10px; color: #334155; font-size: .95rem; }
+.status-bar { padding: 10px 12px; border: 1px solid #bbf7d0; border-radius: 8px; background: #f0fdf4; color: #15803d; font-size: .85rem; font-weight: 600; text-align: center; }
 </style>

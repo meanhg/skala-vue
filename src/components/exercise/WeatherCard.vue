@@ -27,31 +27,40 @@ const displayTemp = computed(() => {
 
 <template>
   <div class="weather-card" :class="{ selected: isSelected }" tabindex="0" @click="emit('select-card', cityItem)" @keydown.enter="emit('select-card', cityItem)">
-    <h4>🏙️ {{ cityItem.name }} 날씨 현황</h4>
-    <p>날씨: {{ cityItem.status }}</p>
-    <p>현재 기온: {{ displayTemp }}{{ configStore.unitSymbol }}</p>
+    <div class="weather-info">
+      <h4>🏙️ {{ cityItem.name }} 날씨 현황</h4>
+      <p>날씨: {{ cityItem.status }}</p>
+      <p>현재 기온: {{ displayTemp }}{{ configStore.unitSymbol }}</p>
+    </div>
 
-    <span v-if="cityItem.temp >= 25" class="badge hot">🫠 더움 (25도 이상)</span>
-    <span v-else class="badge cool">❄️ 선선함 (25도 미만)</span>
-
-    <button class="btn-detail" type="button" @click.stop="emit('click-detail', cityItem)">상세보기</button>
+    <div class="weather-actions">
+      <span v-if="cityItem.temp >= 25" class="badge hot">🫠 더움 (25도 이상)</span>
+      <span v-else class="badge cool">❄️ 선선함 (25도 미만)</span>
+      <el-button class="btn-detail" size="small" @click.stop="emit('click-detail', cityItem)">상세보기</el-button>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .weather-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
   background: #fff;
-  border: 1px solid #dee2e6;
+  border: 1px solid #e2e8f0;
   padding: 12px;
-  margin-bottom: 10px;
-  border-radius: 6px;
+  margin-bottom: 8px;
+  border-radius: 8px;
   cursor: pointer;
-  position: relative;
 }
-.weather-card:hover, .weather-card:focus, .weather-card.selected { border-color: #72b9df; background: #f0f9ff; outline: none; }
-.weather-card h4, .weather-card p { margin: 0; line-height: 1.4; }
-.badge { display: inline-block; margin-top: 4px; padding: 4px 8px; font-size: 12px; border-radius: 4px; color: #fff; }
+.weather-card:hover, .weather-card:focus, .weather-card.selected { border-color: #93c5fd; background: #f8fbff; outline: none; }
+.weather-card h4 { margin: 0 0 6px; color: #334155; font-size: .95rem; }
+.weather-card p { margin: 0; color: #64748b; line-height: 1.55; }
+.weather-actions { display: flex; align-items: center; gap: 12px; }
+.badge { display: inline-block; padding: 5px 9px; font-size: 12px; border-radius: 4px; color: #fff; white-space: nowrap; }
 .hot { background-color: #ff7675; }
 .cool { background-color: #74b9ff; }
-.btn-detail { position: absolute; right: 12px; top: 15px; padding: 6px 10px; cursor: pointer; }
+.btn-detail { height: 25px; padding: 0 10px; font-size: .85rem; }
+@media (max-width: 520px) { .weather-card { align-items: flex-start; flex-direction: column; gap: 12px; } .weather-actions { width: 100%; justify-content: space-between; } }
 </style>

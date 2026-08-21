@@ -1,11 +1,11 @@
 # SKALA Vue 학습 프로젝트
 
-Vue 3와 Vite를 활용한 학습·실습 프로젝트입니다.
+Vue 3와 Vite를 이용한 실습 프로젝트입니다.
 
 ## 1일차 · 학습 환경 설정
 
 - Vue 3 + Vite 프로젝트 생성
-- Vue Router, Pinia 기본 구성
+- Vue Router, Pinia 기본 설정
 - 개발 서버 실행 및 프로젝트 구조 확인
 
 ```sh
@@ -13,66 +13,76 @@ npm install
 npm run dev
 ```
 
-## 2일차 · Vue 기본 문법 실습
+## 2일차 · Vue 기본 문법
 
 - 반응성 데이터와 텍스트 보간법
 - Vue Directive
   - `v-html`, `v-text`, `v-bind`, `v-if`, `v-show`, `v-for`
   - `v-pre`, `v-cloak`, `v-once`, `v-memo`
-- 이벤트 처리
-  - `v-on`, 이벤트 객체, 이벤트 수식어
-- 폼 처리
-  - `v-model`, HTML Form 요소 바인딩, `v-model` 수식어
-- Scoped 스타일 및 외부 CSS 활용
+- 이벤트 처리와 이벤트 수식어
+- `v-model`과 Form 처리
+- Scoped 스타일
 
-각 문법 예제는 `src/components/practices/basic/`에 있습니다. `/practices` 경로에서 예제를 선택해 실행할 수 있습니다.
+`/practices`에서 문법 예제를 확인할 수 있습니다.
 
-## 2일차 실습 과제 · Weather Mockup
+### Weather Mockup
 
-홈(`/`)에서 다음 기능을 구현했습니다.
+- 지역별 날씨 목 데이터 출력
+- 도시명 검색
+- 기온에 따른 더움/선선함 표시
+- 카드 선택과 상세보기 버튼 처리
 
-- 대한민국 광역시 6곳의 날씨 목 데이터를 `v-for`와 `:key`로 렌더링
-- 기온 25°C 기준으로 더움/선선함 라벨을 조건부 렌더링
-- 도시명 한글 검색 (`v-model`)
-- 카드 클릭 선택 알림과 상세보기 버튼의 이벤트 전파 차단 (`.stop`)
-- 데이터 추가 기능은 다음 단계에서 구현 예정
+## 3일차 · Composition API와 Component
 
-## 3일차 · Composition API 실습
+- `ref()`, `reactive()` 반응형 상태
+- `computed()`, `watch()`, `watchEffect()`
+- Component Lifecycle Hook
+- Props & Emits
+- Default Slot, Named Slot, Scoped Slot
+- Element Plus UI Library 적용
 
-기존 Weather Mockup을 Composition API로 발전시켰습니다.
+### Weather Composition
 
-- `ref()`로 검색어, 선택 도시, 날씨 목록 상태 관리
-- `computed()`를 활용한 도시명 실시간 검색 (`filteredWeatherList`)
-- `watch()`로 선택 상태 문구와 선택 도시 변경 감시
-- `watchEffect()`로 검색어 변경 자동 감시
-- 검색 결과가 없을 때 안내 문구 출력
+- 검색어와 선택 도시 상태 관리
+- `computed()`를 이용한 도시 검색
+- `watch()`와 `watchEffect()` 동작 확인
 
 ![Composition API Watcher 실습 화면](screenshots/weather-composition-watchers.png)
 
-## 4일차 · Vue Router 실습
+### Weather Component
 
-Weather Component 대시보드를 Vue Router 기반으로 전환했습니다.
+- `WeatherParent`, `BaseDashboardCard`, `SearchBar`, `WeatherCard`로 화면 분리
+- Props와 Emits를 이용한 검색, 카드 선택, 상세보기 처리
+- Element Plus Card, Input, Button, Alert 적용
 
-- 라우트 지연 로딩과 Catch-all Route 적용
-- `RouterLink`, `RouterView` 기반 내비게이션 바 구성
-- 검색어를 URL 쿼리(`search`)와 동기화
-- 상세보기 버튼을 `/weather/:cityId` 동적 경로 이동으로 변경
-- 도시별 Mock 상세 날씨 정보 화면과 서비스 소개 화면 작성
-- 추가 view: 라우터 동작을 정리한 `/guide` 학습 안내 화면 작성
+### Element Plus Code Challenge
 
-## 4일차 · Pinia Store 실습
+- 회원가입 Form과 이메일·약관 검증 메시지
+- 상품 수량 선택, 별점, 실시간 요약
+- 삭제 확인창과 다운로드 진행률 표시
 
-- `configStore`로 섭씨/화씨 단위를 전역 상태로 관리
-- 내비게이션 바의 단위 변경 버튼으로 대시보드와 상세 페이지 온도를 함께 전환
-- 추가 getter `unitLabel`로 현재 선택한 단위 문구를 표시
+## 4일차 · Vue Router
 
-## 4일차 · Axios 실습
+- Lazy Loading과 Catch-all Route 적용
+- `RouterLink`, `RouterView` 내비게이션 구성
+- 검색어 쿼리 스트링 처리
+- `/weather/:cityId` 동적 상세 페이지
+- 서비스 소개, 추가 view, 404 페이지 작성
 
-- `axios` 설치 후 OpenWeatherMap 현재 날씨 API를 메인 대시보드에 적용
-- 도시 상세 화면에서 OpenWeatherMap 단기 예보 API를 추가로 호출
-- PDF의 외부 API 확장 요구사항을 위해 Open-Meteo API의 체감 온도·풍속 정보를 상세 화면에 추가
-- API 키는 `.env`의 `VITE_OPENWEATHERMAP_API_KEY`로 분리하고 `.env.example` 제공
-- `/practices`에 Axios Weather API 및 JSONPlaceholder CRUD 예제 추가
+## 4일차 · Pinia
+
+- Counter Store 작성
+- 날씨 단위 설정 Store 작성
+- 섭씨/화씨 단위 변경을 메인과 상세 날씨 화면에 적용
+
+## 4일차 · Axios
+
+- Axios 설치
+- OpenWeatherMap 현재 날씨 API 적용
+- OpenWeatherMap 예보 API 추가
+- 외부 API를 활용한 날씨 정보 확장
+- Axios Weather 예제와 JSON CRUD 예제 작성
+
 
 ## 명령어
 
