@@ -24,6 +24,9 @@ import VuePre from '@/components/practices/basic/VuePre.vue'
 import VueShow from '@/components/practices/basic/VueShow.vue'
 import VueText from '@/components/practices/basic/VueText.vue'
 import AxiosWeather from '@/components/practices/library/AxiosWeather.vue'
+import AxiosWeatherApi from '@/components/practices/library/AxiosWeatherApi.vue'
+import AxiosJson from '@/components/practices/library/AxiosJson.vue'
+import StoreCounter from '@/components/practices/library/StoreCounter.vue'
 import ReactiveReactive from '@/components/practices/composition/ReactiveReactive.vue'
 import ReactiveRef from '@/components/practices/composition/ReactiveRef.vue'
 import ComputedBasic from '@/components/practices/composition/ComputedBasic.vue'
@@ -53,6 +56,7 @@ const practices = [
   ['Default Slot', 'SlotDefaultParent', SlotDefaultParent],
   ['Named Slot', 'SlotNamedParent', SlotNamedParent],
   ['Scoped Slot', 'SlotScopedParent', SlotScopedParent],
+  ['Pinia Counter Store', 'StoreCounter', StoreCounter],
   ['텍스트 보간법', 'SampleTwo', SampleTwo],
   ['v-html', 'VueHtml', VueHtml],
   ['v-html XSS', 'VueHtmlXss', VueHtmlXss],
@@ -76,6 +80,8 @@ const practices = [
   ['v-model 수식어', 'ModelModifier', ModelModifier],
   ['Vue 스타일', 'StyleScoped', StyleScoped],
   ['날씨 Mockup', 'AxiosWeather', AxiosWeather],
+  ['Axios Weather API', 'AxiosWeatherApi', AxiosWeatherApi],
+  ['Axios JSON CRUD', 'AxiosJson', AxiosJson],
 ]
 
 const selectedName = ref(practices[0][1])

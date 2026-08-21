@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { useConfigStore } from '@/stores/configStore'
 
 const props = defineProps({
   cityItem: {
@@ -14,13 +15,21 @@ const props = defineProps({
 
 const emit = defineEmits(['select-card', 'click-detail'])
 const isSelected = computed(() => props.selectedCity?.id === props.cityItem.id)
+const configStore = useConfigStore()
+const displayTemp = computed(() => {
+  if (configStore.unit === 'fahrenheit') {
+    return Math.round((props.cityItem.temp * 9) / 5 + 32)
+  }
+
+  return props.cityItem.temp
+})
 </script>
 
 <template>
   <div class="weather-card" :class="{ selected: isSelected }" tabindex="0" @click="emit('select-card', cityItem)" @keydown.enter="emit('select-card', cityItem)">
     <h4>🏙️ {{ cityItem.name }} 날씨 현황</h4>
     <p>날씨: {{ cityItem.status }}</p>
-    <p>현재 기온: {{ cityItem.temp }}°C</p>
+    <p>현재 기온: {{ displayTemp }}{{ configStore.unitSymbol }}</p>
 
     <span v-if="cityItem.temp >= 25" class="badge hot">🫠 더움 (25도 이상)</span>
     <span v-else class="badge cool">❄️ 선선함 (25도 미만)</span>

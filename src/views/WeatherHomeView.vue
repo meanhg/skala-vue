@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import axios from 'axios'
 import { useRoute, useRouter } from 'vue-router'
 import BaseDashboardCard from '@/components/exercise/BaseDashboardCard.vue'
 import SearchBar from '@/components/exercise/SearchBar.vue'
@@ -7,6 +8,8 @@ import WeatherCard from '@/components/exercise/WeatherCard.vue'
 
 const router = useRouter()
 const route = useRoute()
+const API_KEY = import.meta.env.VITE_OPENWEATHERMAP_API_KEY
+const CURRENT_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
 
 const weatherList = ref([
   { id: 'city_01', name: '부산', temp: 28, status: '맑음' },
@@ -20,11 +23,56 @@ const weatherList = ref([
 const searchQuery = ref('')
 const selectedCity = ref(null)
 const selectedCityInfo = ref('카드를 클릭하거나 검색해 보세요.')
+const isLoading = ref(false)
+const apiError = ref('')
 
-onMounted(() => {
+const cityQueries = [
+  { id: 'city_01', name: '부산', query: 'Busan,KR' },
+  { id: 'city_02', name: '대구', query: 'Daegu,KR' },
+  { id: 'city_03', name: '인천', query: 'Incheon,KR' },
+  { id: 'city_04', name: '광주', query: 'Gwangju,KR' },
+  { id: 'city_05', name: '대전', query: 'Daejeon,KR' },
+  { id: 'city_06', name: '울산', query: 'Ulsan,KR' },
+]
+
+const fetchRealTimeWeather = async () => {
+  if (!API_KEY) {
+    apiError.value = 'OpenWeatherMap API 키가 설정되지 않았습니다.'
+    return
+  }
+
+  isLoading.value = true
+  apiError.value = ''
+
+  try {
+    const responses = await Promise.all(
+      cityQueries.map((city) =>
+        axios.get(CURRENT_WEATHER_URL, {
+          params: { q: city.query, appid: API_KEY, units: 'metric', lang: 'kr' },
+        }),
+      ),
+    )
+
+    weatherList.value = responses.map((response, index) => ({
+      id: cityQueries[index].id,
+      name: cityQueries[index].name,
+      temp: Math.round(response.data.main.temp),
+      status: response.data.weather[0].description,
+    }))
+  } catch (error) {
+    console.error('OpenWeatherMap 현재 날씨 조회 실패:', error)
+    apiError.value = '실시간 날씨를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(async () => {
   if (route.query.search) {
     searchQuery.value = route.query.search
   }
+
+  await fetchRealTimeWeather()
 })
 
 watch(searchQuery, (newQuery) => {
@@ -70,6 +118,8 @@ const handleDetailJump = (city) => {
 
     <BaseDashboardCard>
       <h3>🏙️ 지역별 날씨 현황</h3>
+      <p v-if="isLoading" class="loading">🔄 실시간 날씨 데이터를 불러오는 중입니다.</p>
+      <p v-else-if="apiError" class="api-error">{{ apiError }}</p>
       <WeatherCard
         v-for="item in filteredWeatherList"
         :key="item.id"
@@ -78,7 +128,7 @@ const handleDetailJump = (city) => {
         @select-card="selectCity"
         @click-detail="handleDetailJump"
       />
-      <p v-if="filteredWeatherList.length === 0" class="empty">😭 검색 결과와 일치하는 도시가 없습니다.</p>
+      <p v-if="!isLoading && filteredWeatherList.length === 0" class="empty">😭 검색 결과와 일치하는 도시가 없습니다.</p>
     </BaseDashboardCard>
 
     <div class="status-bar">{{ selectedCityInfo }}</div>
@@ -89,5 +139,7 @@ const handleDetailJump = (city) => {
 .dashboard-wrapper { width: min(100%, 600px); margin: 0 auto; }
 .dashboard-wrapper h3 { margin: 0 0 10px; color: #64748b; font-size: .9rem; }
 .empty { margin: 0; padding: 10px 0; color: #e74c3c; text-align: center; }
+.loading { padding: 10px 0; color: #3498db; font-weight: bold; text-align: center; }
+.api-error { padding: 10px; border-radius: 6px; background: #fff5f5; color: #c0392b; text-align: center; }
 .status-bar { padding: 10px; border-radius: 6px; background: #e8f5e9; color: #2e7d32; font-weight: bold; text-align: center; }
 </style>
