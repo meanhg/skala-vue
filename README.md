@@ -60,13 +60,13 @@ Weather Component 대시보드를 Vue Router 기반으로 전환했습니다.
 - 도시별 Mock 상세 날씨 정보 화면과 서비스 소개 화면 작성
 - 추가 view: 라우터 동작을 정리한 `/guide` 학습 안내 화면 작성
 
-## 5일차 · Pinia Store 실습
+## 4일차 · Pinia Store 실습
 
 - `configStore`로 섭씨/화씨 단위를 전역 상태로 관리
 - 내비게이션 바의 단위 변경 버튼으로 대시보드와 상세 페이지 온도를 함께 전환
 - 추가 getter `unitLabel`로 현재 선택한 단위 문구를 표시
 
-## 6일차 · Axios 실습
+## 4일차 · Axios 실습
 
 - `axios` 설치 후 OpenWeatherMap 현재 날씨 API를 메인 대시보드에 적용
 - 도시 상세 화면에서 OpenWeatherMap 단기 예보 API를 추가로 호출
