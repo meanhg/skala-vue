@@ -1,10 +1,10 @@
 <script setup>
-import AxiosWeather from '@/components/practices/library/AxiosWeather.vue'
+import WeatherParent from '@/components/exercise/WeatherParent.vue'
 </script>
 
 <template>
   <main class="weather-page">
-    <AxiosWeather />
+    <WeatherParent />
   </main>
 </template>
 

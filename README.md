@@ -49,6 +49,17 @@ npm run dev
 
 ![Composition API Watcher 실습 화면](screenshots/weather-composition-watchers.png)
 
+## 4일차 · Vue Router 실습
+
+Weather Component 대시보드를 Vue Router 기반으로 전환했습니다.
+
+- 라우트 지연 로딩과 Catch-all Route 적용
+- `RouterLink`, `RouterView` 기반 내비게이션 바 구성
+- 검색어를 URL 쿼리(`search`)와 동기화
+- 상세보기 버튼을 `/weather/:cityId` 동적 경로 이동으로 변경
+- 도시별 Mock 상세 날씨 정보 화면과 서비스 소개 화면 작성
+- 추가 view: 라우터 동작을 정리한 `/guide` 학습 안내 화면 작성
+
 ## 명령어
 
 ```sh

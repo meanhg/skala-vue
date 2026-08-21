@@ -33,6 +33,10 @@ import WatchersMulti from '@/components/practices/composition/WatchersMulti.vue'
 import WatchersReactive from '@/components/practices/composition/WatchersReactive.vue'
 import WatchersWatchEffect from '@/components/practices/composition/WatchersWatchEffect.vue'
 import LifecycleParent from '@/components/practices/component/LifecycleParent.vue'
+import PropsEmitsParent from '@/components/practices/component/PropsEmitsParent.vue'
+import SlotDefaultParent from '@/components/practices/component/SlotDefaultParent.vue'
+import SlotNamedParent from '@/components/practices/component/SlotNamedParent.vue'
+import SlotScopedParent from '@/components/practices/component/SlotScopedParent.vue'
 
 const practices = [
   ['반응성 데이터', 'SampleOne', SampleOne],
@@ -45,6 +49,10 @@ const practices = [
   ['watch() reactive 감시', 'WatchersReactive', WatchersReactive],
   ['watchEffect() 자동 감시', 'WatchersWatchEffect', WatchersWatchEffect],
   ['Component Lifecycle', 'LifecycleParent', LifecycleParent],
+  ['Props & Emits', 'PropsEmitsParent', PropsEmitsParent],
+  ['Default Slot', 'SlotDefaultParent', SlotDefaultParent],
+  ['Named Slot', 'SlotNamedParent', SlotNamedParent],
+  ['Scoped Slot', 'SlotScopedParent', SlotScopedParent],
   ['텍스트 보간법', 'SampleTwo', SampleTwo],
   ['v-html', 'VueHtml', VueHtml],
   ['v-html XSS', 'VueHtmlXss', VueHtmlXss],
