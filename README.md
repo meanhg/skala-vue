@@ -69,13 +69,13 @@ npm run dev
 - `/weather/:cityId` 동적 상세 페이지
 - 서비스 소개, 추가 view, 404 페이지 작성
 
-## 4일차 · Pinia
+## · Pinia
 
 - Counter Store 작성
 - 날씨 단위 설정 Store 작성
 - 섭씨/화씨 단위 변경을 메인과 상세 날씨 화면에 적용
 
-## 4일차 · Axios
+## · Axios
 
 - Axios 설치
 - OpenWeatherMap 현재 날씨 API 적용
